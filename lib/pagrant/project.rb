@@ -6,6 +6,13 @@ module Pagrant
       @path = path
     end
 
+    def safe_mkdir(path)
+      unless Dir.exists?(path)
+        puts "Creating #{path}"
+        Dir.mkdir(path)
+      end
+    end
+
     def walk_tree(source, dest)
       Dir.entries(source).each do |entry|
         unless [".", ".."].include?(entry)
@@ -13,14 +20,12 @@ module Pagrant
           newdest = File.join(dest, entry)
 
           if Dir.exists?(newsource)
-            Dir.mkdir(newdest) unless Dir.exists?(newdest)
+            safe_mkdir(newdest)
             walk_tree(newsource, newdest)
           else
             newfile = newdest[0..-5]
 
-            puts newsource
-            puts newfile
-            puts
+            puts "Writing #{newfile}"
 
             template = ERB.new(File.read(newsource))
 
@@ -33,7 +38,7 @@ module Pagrant
     end
 
     def generate
-      Dir.mkdir(@path) unless Dir.exists?(@path)
+      safe_mkdir(@path)
       walk_tree(TEMPLATE_DIR, @path)
     end
   end
