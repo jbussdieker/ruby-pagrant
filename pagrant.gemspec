@@ -8,8 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Pagrant::VERSION
   spec.authors       = ["Joshua B. Bussdieker"]
   spec.email         = ["jbussdieker@brightroll.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Quickly build a Vagrant + Puppet project.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
