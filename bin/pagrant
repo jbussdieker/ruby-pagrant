@@ -1,1 +1,12 @@
 #!/usr/bin/env ruby
+require 'pagrant'
+
+if ARGV.length == 0
+  Pagrant.generate(Dir.pwd)
+elsif ARGV.length == 1
+  path = File.join(Dir.pwd, ARGV[0])
+  Pagrant.generate(path)
+else
+  puts "Invalid arguments"
+  exit 1
+end
